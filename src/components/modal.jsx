@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 import { FiPhone } from "react-icons/fi";
 import { LuDelete } from "react-icons/lu";
 import { MdVoicemail } from "react-icons/md";
-import { modal } from "../App.jsx";
 import colors from "../utils/colors";
 import { maskPhone } from "../utils/maskPhone";
 
@@ -13,6 +12,15 @@ const color = colors.main[900];
 const classNameByVariant = {
   primary: "alert",
   secondary: "drawer",
+};
+
+export const modal = {
+  none: 0,
+  archive: 1,
+  retrieve: 2,
+  call: 3,
+  callFail: 4,
+  archiveOne: 5,
 };
 
 const Modal = ({ children, variant = "primary", className }) => {
@@ -161,7 +169,7 @@ export default Modal;
 
 Modal.propTypes = {
   children: PropTypes.node,
-  variant: PropTypes.oneOf(["primary", "secondary"]),
+  variant: PropTypes.oneOf(Object.keys(classNameByVariant)),
   className: PropTypes.string,
 };
 
@@ -175,6 +183,12 @@ Field.propTypes = {
   value: PropTypes.string,
   className: PropTypes.string,
 };
+
+NumberButton.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  btmContent: PropTypes.node,
+  onClick: PropTypes.func.isRequired,
+}
 
 NumberBoard.propTypes = {
   className: PropTypes.string,

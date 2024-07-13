@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CallCard from "./CallCard.jsx";
 
 const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone }) => {
@@ -35,3 +36,24 @@ const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone 
 };
 
 export default AllCalls;
+
+AllCalls.propTypes = {
+  calls: PropTypes.arrayOf(PropTypes.exact({
+    date: PropTypes.string,
+    calls: PropTypes.arrayOf(PropTypes.exact({
+      direction: PropTypes.oneOf(["inbound", "outbound"]),
+      from: PropTypes.number,
+      to: PropTypes.number,
+      via: PropTypes.number,
+      duration: PropTypes.number,
+      is_archived: PropTypes.bool,
+      call_type: PropTypes.oneOf(["missed", "answered", "voicemail"]),
+      id: PropTypes.string,
+      created_at: PropTypes.string,
+    }))
+  })).isRequired,
+  moreInfo: PropTypes.string.isRequired,
+  setMoreInfo: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  setPhone: PropTypes.func.isRequired,
+};

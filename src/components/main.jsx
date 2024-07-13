@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { modal } from "../App.jsx";
 import { api } from "../utils/api.js";
 import { archiveCalls, getCalls, retrieveCalls } from "../utils/calls.js";
 import { maskPhone } from "../utils/maskPhone.js";
 import AllCalls from "./AllCalls/index.jsx";
 import { activeType } from "./Header/index.jsx";
-import Modal from "./modal.jsx";
+import Modal, { modal } from "./modal.jsx";
 
 const Main = ({ active, showModal, setShowModal, setActive }) => {
   const [calls, setCalls] = useState([]);
@@ -171,3 +171,10 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
 };
 
 export default Main;
+
+Main.propTypes = {
+  active: PropTypes.oneOf(Object.values(activeType)),
+  showModal: PropTypes.oneOf(Object.values(modal)),
+  setActive: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+};
