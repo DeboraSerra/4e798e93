@@ -11,7 +11,8 @@ export const modal = {
   archive: 1,
   retrieve: 2,
   call: 3,
-  callFail: 4
+  callFail: 4,
+  archiveOne: 5,
 };
 
 const App = () => {

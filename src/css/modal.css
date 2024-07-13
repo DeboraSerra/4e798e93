@@ -18,7 +18,8 @@
 .modal.alert .modal__content {
   background-color: var(--main-100);
   width: 80%;
-  height: 40%;
+  min-height: 40%;
+  max-height: 50%;
   border-radius: 12px;
   padding: 24px;
   display: flex;

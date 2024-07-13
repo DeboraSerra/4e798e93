@@ -5,10 +5,11 @@ import { BiMessageDetail } from "react-icons/bi";
 import { FiArchive, FiPhoneCall } from "react-icons/fi";
 import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
 import { VscCallIncoming } from "react-icons/vsc";
+import { modal } from "../../App.jsx";
 import colors from "../../utils/colors";
 import Card from "../card.jsx";
 
-const size = 20
+const size = 20;
 
 const CallType = {
   missed: <MdOutlinePhoneMissed color={colors.red} size={size} />,
@@ -16,12 +17,13 @@ const CallType = {
   voicemail: <MdVoicemail color={colors.main[900]} size={size} />,
 };
 
-const CallCard = ({ call, moreInfo, setMoreInfo }) => {
+const CallCard = ({ call, moreInfo, setMoreInfo, setShowModal, setPhone }) => {
   const handleMoreInfoClick = () => {
     if (moreInfo === call.id) {
       setMoreInfo("");
     } else setMoreInfo(call.id);
   };
+
   return (
     <Card>
       <Card.Content onClick={handleMoreInfoClick}>
@@ -36,17 +38,22 @@ const CallCard = ({ call, moreInfo, setMoreInfo }) => {
       </Card.Content>
       {moreInfo === call.id ? (
         <Card.Body>
-          <Card.Button>
+          <Card.Button
+            onClick={() => {
+              setShowModal(modal.call);
+              setPhone(String(call.to));
+            }}
+          >
             <FiPhoneCall color={colors.main[900]} size={size} />
             <Card.Text>
               {call.direction === "inbound" ? "Call back" : "Try again"}
             </Card.Text>
           </Card.Button>
-          <Card.Button>
+          <Card.Button onClick={() => setShowModal(modal.callFail)}>
             <BiMessageDetail color={colors.main[900]} size={size} />
             <Card.Text>Send message</Card.Text>
           </Card.Button>
-          <Card.Button>
+          <Card.Button onClick={() => setShowModal(modal.archiveOne)}>
             <FiArchive color={colors.main[900]} size={size} />
             <Card.Text>Archive call</Card.Text>
           </Card.Button>
