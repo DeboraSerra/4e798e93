@@ -1,3 +1,36 @@
+:root {
+  --red: #f00;
+  --green: #2ac420;
+  --white:#fff;
+  --main-100: #f1f1f1;
+  --main-200: #e6e6e6;
+  --main-300: #c7c7c7;
+  --main-400: #a8a8a8;
+  --main-500: #858282;
+  --main-600: #5f5b5b;
+  --main-700: #443f3f;
+  --main-800: #252222;
+  --main-900: #141414;
+  --secondary-100: #f79090;
+  --secondary-200: #e26868;
+  --secondary-300: #dd4747;
+  --secondary-400: #d62525;
+  --secondary-500: #b61717;
+  --secondary-600: #8a1212;
+  --secondary-700: #681111;
+  --secondary-800: #470505;
+  --secondary-900: #2e0000;
+  --accent-100: #95d391;
+  --accent-200: #72db6a;
+  --accent-300: #45bb3d;
+  --accent-400: #36be2c;
+  --accent-500: #2ac420;
+  --accent-600: #1ea514;
+  --accent-700: #11800a;
+  --accent-800: #095704;
+  --accent-900: #043001;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -19,27 +52,30 @@
   width: 376px;
   height: 666px;
   z-index: 100;
+  position: relative;
 
-  background: white;
+  background: var(--white);
   border-radius: 3px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.9);
 }
 
-#app .container-view::-webkit-scrollbar{
+#app .container-view::-webkit-scrollbar {
   width: 4px;
 }
 
-#app .container-view::-webkit-scrollbar-track{
-  background-color: #c7c7c7;
+#app .container-view::-webkit-scrollbar-track {
+  background-color: var(--main-500);
 }
 
 #app .container-view::-webkit-scrollbar-thumb {
-  background-color: #043001;
+  background-color: var(--accent-900);
   border-radius: 12px;
 }
 
 #app .container-view {
-  padding: 20px 20px 80px;
+  padding: 20px 20px 32px;
   max-height: 580px;
+  min-height: 580px;
   overflow-y: auto;
+  background-color: var(--main-200);
 }

@@ -24,8 +24,15 @@ const Body = ({ children, className }) => {
   return <div className={`card__body ${className ?? ""}`}>{children}</div>;
 };
 
-const Button = ({ children, className }) => {
-  return <button className={`card__btn ${className ?? ""}`}>{children}</button>;
+const Button = ({ children, className, onClick }) => {
+  return (
+    <button
+      className={`card__btn ${className ?? ""}`}
+      onClick={onClick ?? undefined}
+    >
+      {children}
+    </button>
+  );
 };
 
 Card.Content = Content;
@@ -54,6 +61,7 @@ Text.propTypes = {
 Button.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Body.propTypes = {

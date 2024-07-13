@@ -1,3 +1,5 @@
+@import url(./app.css);
+
 .main__title {
   margin-bottom: 20px;
   text-align: center;
@@ -8,7 +10,7 @@
 .main__subtitle {
   margin-bottom: 16px;
   padding-bottom: 8px;
-  border-bottom: 1px dashed #e6e6e6;
+  border-bottom: 1px dashed var(--main-400);
 
   text-align: center;
   font-size: 14px;
