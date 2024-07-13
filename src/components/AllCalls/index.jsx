@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-
+import React from "react";
 import CallCard from "./CallCard.jsx";
 
-const AllCalls = ({ calls }) => {
-  const [moreInfo, setMoreInfo] = useState("");
-
+const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone }) => {
   return (
     <div className='main'>
-      <h1 className='main__title'>All Calls</h1>
+      <h1 className='main__title'>{title}</h1>
       <div className='main__calls'>
         {calls.length > 0 ? (
           calls.map((dates) => (
@@ -20,6 +17,8 @@ const AllCalls = ({ calls }) => {
                     call={call}
                     moreInfo={moreInfo}
                     setMoreInfo={setMoreInfo}
+                    setShowModal={setShowModal}
+                    setPhone={setPhone}
                   />
                 ))}
               </div>
