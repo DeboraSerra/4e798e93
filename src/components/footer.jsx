@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { CgMenuGridO } from "react-icons/cg";
-import { GiSettingsKnobs } from "react-icons/gi";
+import { LuSettings2 } from "react-icons/lu";
+import { PiNumpad } from "react-icons/pi";
 import {
   RiInboxArchiveLine,
   RiInboxUnarchiveLine,
@@ -35,13 +35,13 @@ const Footer = () => {
           handleOpenModal(modal.call);
         }}
       >
-        <CgMenuGridO color={colors.main[100]} size={size * 1.5} />
+        <PiNumpad color={colors.main[100]} size={size * 1.5} />
       </Card.Button>
       <Card.Button onClick={() => handleOpenModal(modal.retrieve)}>
         <RiInboxUnarchiveLine color={colorMain} size={size} />
       </Card.Button>
       <Card.Button onClick={() => handleOpenModal(modal.callFail)}>
-        <GiSettingsKnobs color={colorMain} size={size} />
+        <LuSettings2 color={colorMain} size={size} />
       </Card.Button>
     </footer>
   );

@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import React, { useContext } from "react";
 import { BiMessageDetail } from "react-icons/bi";
 import { FiArchive, FiPhoneCall } from "react-icons/fi";
 import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
@@ -44,8 +44,7 @@ const CallCard = ({ call }) => {
             onClick={() => {
               setState((prev) => ({
                 ...prev,
-                phone: String(call.to),
-                showModal: modal.call,
+                showModal: modal.callFail,
               }));
             }}
           >
