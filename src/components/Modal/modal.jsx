@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { FiPhone } from "react-icons/fi";
 import { LuDelete } from "react-icons/lu";
 import { MdVoicemail } from "react-icons/md";
-import colors from "../utils/colors";
-import { maskPhone } from "../utils/maskPhone";
+import colors from "../../utils/colors";
+import { maskPhone } from "../../utils/maskPhone";
 
 const size = 28;
 const color = colors.main[900];
@@ -32,12 +32,7 @@ const Modal = ({ children, variant = "primary", className }) => {
 };
 
 const Content = ({ children, className }) => {
-
-  return (
-    <div className={`modal__content ${className ?? ""}`}>
-      {children}
-    </div>
-  );
+  return <div className={`modal__content ${className ?? ""}`}>{children}</div>;
 };
 
 const Button = ({ children, className, onClick }) => {
@@ -188,7 +183,7 @@ NumberButton.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   btmContent: PropTypes.node,
   onClick: PropTypes.func.isRequired,
-}
+};
 
 NumberBoard.propTypes = {
   className: PropTypes.string,

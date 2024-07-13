@@ -8,7 +8,7 @@ import { VscCallIncoming } from "react-icons/vsc";
 import colors from "../../utils/colors";
 import Card from "../card.jsx";
 import { activeType } from "../Header/index.jsx";
-import { modal } from "../modal.jsx";
+import { modal } from "../Modal/modal.jsx";
 
 const size = 20;
 

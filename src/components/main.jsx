@@ -1,12 +1,15 @@
-import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { api } from "../utils/api.js";
 import { archiveCalls, getCalls, retrieveCalls } from "../utils/calls.js";
-import { maskPhone } from "../utils/maskPhone.js";
 import AllCalls from "./AllCalls/index.jsx";
 import { activeType } from "./Header/index.jsx";
-import Modal, { modal } from "./modal.jsx";
+import ArchiveModal from "./Modal/archiveModal.jsx";
+import ArchiveOneModal from "./Modal/archiveOneModal.jsx";
+import CallFailModal from "./Modal/callFailModal.jsx";
+import CallModal from "./Modal/callModal.jsx";
+import { modal } from "./Modal/modal.jsx";
+import RetrieveModal from "./Modal/retrieveModal.jsx";
 
 const Main = ({ active, showModal, setShowModal, setActive }) => {
   const [calls, setCalls] = useState([]);
@@ -66,109 +69,39 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
         active={active}
       />
       {showModal === modal.archive ? (
-        <Modal>
-          <Modal.Content>
-            <p className='main__text'>Do you want to archive all calls?</p>
-            <div className='main__btn--container'>
-              <Modal.Button
-                onClick={() => setShowModal(modal.none)}
-                className='cancel'
-              >
-                No
-              </Modal.Button>
-              <Modal.Button onClick={handleArchiveCalls} className='confirm'>
-                Yes
-              </Modal.Button>
-            </div>
-          </Modal.Content>
-        </Modal>
+        <ArchiveModal
+          handleArchiveCalls={handleArchiveCalls}
+          setShowModal={setShowModal}
+        />
       ) : null}
 
       {showModal === modal.retrieve ? (
-        <Modal>
-          <Modal.Content>
-            <p className='main__text'>Do you want to retrieve all calls?</p>
-            <div className='main__btn--container'>
-              <Modal.Button
-                onClick={() => setShowModal(modal.none)}
-                className='cancel'
-              >
-                No
-              </Modal.Button>
-              <Modal.Button onClick={handleRetrieveCalls} className='confirm'>
-                Yes
-              </Modal.Button>
-            </div>
-          </Modal.Content>
-        </Modal>
+        <RetrieveModal
+          handleRetrieveCalls={handleRetrieveCalls}
+          setShowModal={setShowModal}
+        />
       ) : null}
 
       {showModal === modal.call ? (
-        <Modal variant='secondary'>
-          <Modal.Content className={showModal === modal.call ? "show" : ""}>
-            <Modal.Field value={phone} setValue={setPhone} />
-            <Modal.NumberBoard
-              onClick={(value) => setPhone((prev) => maskPhone(prev + value))}
-              onCallClick={handleOnCall}
-              onClear={() => setPhone((prev) => prev.slice(0, -1))}
-            />
-          </Modal.Content>
-        </Modal>
+        <CallModal
+          handleOnCall={handleOnCall}
+          phone={phone}
+          setPhone={setPhone}
+          showModal={showModal}
+        />
       ) : null}
 
       {showModal === modal.callFail ? (
-        <Modal>
-          <Modal.Content>
-            <p className='main__text'>Sorry...</p>
-            <p className='main__text'>
-              This function isn&apos;t available yet :(
-            </p>
-            <div className='main__btn--container'>
-              <Modal.Button onClick={() => setShowModal(modal.none)}>
-                Ok
-              </Modal.Button>
-            </div>
-          </Modal.Content>
-        </Modal>
+        <CallFailModal setShowModal={setShowModal} />
       ) : null}
 
       {showModal === modal.archiveOne ? (
-        <Modal>
-          <Modal.Content>
-            <p className='main__text'>
-              Do you want to{" "}
-              {active === activeType.all ? "archive" : "retrieve"} this call?
-            </p>
-            <div className='main__desc'>
-              <p className='main__desc--text'>
-                <strong>Call from:</strong> {call.from}
-              </p>
-              <p className='main__desc--text'>
-                <strong>to:</strong> {call.to}
-              </p>
-              <p className='main__desc--text'>
-                <strong>
-                  {call.direction === "outbound" ? "Made" : "Received"} at:{" "}
-                </strong>
-                {dayjs(call.created_at).format("MMMM[, ]DD YYYY[ at ]HH[:]MM")}
-              </p>
-              <p className='main__desc--text'>
-                <strong>Duration:</strong> {call.duration}
-              </p>
-            </div>
-            <div className='main__btn--container'>
-              <Modal.Button
-                onClick={() => setShowModal(modal.none)}
-                className='cancel'
-              >
-                No
-              </Modal.Button>
-              <Modal.Button onClick={handleArchiveOneCall} className='confirm'>
-                Yes
-              </Modal.Button>
-            </div>
-          </Modal.Content>
-        </Modal>
+        <ArchiveOneModal
+          active={active}
+          call={call}
+          handleArchiveOneCall={handleArchiveOneCall}
+          setShowModal={setShowModal}
+        />
       ) : null}
     </div>
   );
