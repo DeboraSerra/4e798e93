@@ -11,11 +11,12 @@ export const modal = {
   archive: 1,
   retrieve: 2,
   call: 3,
+  callFail: 4
 };
 
 const App = () => {
   const [active, setActive] = useState(activeType.all);
-  const [showModal, setShowModal] = useState(modal.none);
+  const [showModal, setShowModal] = useState(modal.call);
 
   return (
     <div className='container'>

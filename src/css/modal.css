@@ -27,6 +27,33 @@
   justify-content: center;
 }
 
+.modal.drawer {
+  align-items: end;
+}
+
+.modal.drawer .modal__content {
+  background-color: var(--main-100);
+  width: 100%;
+  height: 80%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal__field {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--main-300);
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 18px;
+}
+
+.modal__field:focus {
+  outline: none;
+}
+
 .modal__btn {
   border: none;
   background-color: transparent;
@@ -39,10 +66,83 @@
   opacity: 0.7;
 }
 
-.modal__btn.cancel{
+.modal__btn.cancel {
   color: var(--red);
 }
 
-.modal__btn.confirm{
+.modal__btn.confirm {
   color: var(--green);
+}
+
+.modal__board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+}
+
+.modal__board--row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.modal__board--row:last-of-type {
+  display: flex;
+  margin-top: 24px;
+}
+
+.modal__board--num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: none;
+}
+
+.modal__board--num small {
+  font-size: 12px;
+}
+
+.modal__board--num:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal__board--btn {
+  border: none;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 50px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal__board--btn.call {
+  background-color: var(--accent-600);
+  color: var(--main-100);
+}
+
+.modal__board--btn.clear:hover {
+  opacity: 0.8;
+}
+.modal__board--btn span {
+  margin-left: 8px;
+}
+
+.modal__board--btn.call:hover {
+  background-color: var(--accent-700);
 }

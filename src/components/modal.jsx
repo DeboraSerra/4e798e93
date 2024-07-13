@@ -4,6 +4,7 @@ import { FiPhone } from "react-icons/fi";
 import { LuDelete } from "react-icons/lu";
 import { MdVoicemail } from "react-icons/md";
 import colors from "../utils/colors";
+import { maskPhone } from "../utils/maskPhone";
 
 const size = 28;
 const color = colors.main[900];
@@ -42,66 +43,104 @@ const Field = ({ setValue, value = "", className }) => {
       type='text'
       className={`modal__field ${className ?? ""}`}
       value={value}
-      setValue={setValue}
+      onChange={({ target }) => setValue(maskPhone(target.value))}
     />
   );
 };
 
-const NumberBoard = ({ className }) => {
+const NumberButton = ({ value, btmContent, onClick }) => {
+  return (
+    <button
+      className='modal__board--num'
+      onClick={() => onClick(value)}
+      onKeyDown={(e) => {
+        if (e.key === value) {
+          onClick(e.key);
+        }
+      }}
+    >
+      {value}
+      {!!btmContent ? btmContent : null}
+    </button>
+  );
+};
+
+const NumberBoard = ({ className, onClick, onCallClick, onClear }) => {
   return (
     <div className={`modal__board ${className ?? ""}`}>
       <div className='modal__board--row'>
-        <p className='modal__board--num'>
-          1
-          <small>
-            <MdVoicemail color={color} size={size} />
-          </small>
-        </p>
-        <p className='modal__board--num'>
-          2<small>ABC</small>
-        </p>
-        <p className='modal__board--num'>
-          3<small>DEF</small>
-        </p>
+        <NumberButton
+          onClick={onClick}
+          btmContent={
+            <small>
+              <MdVoicemail color={color} size={14} />
+            </small>
+          }
+          value='1'
+        />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>ABC</small>}
+          value='2'
+        />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>DEF</small>}
+          value='3'
+        />
       </div>
       <div className='modal__board--row'>
-        <p className='modal__board--num'>
-          4<small>GHI</small>
-        </p>
-        <p className='modal__board--num'>
-          5<small>JKL</small>
-        </p>
-        <p className='modal__board--num'>
-          6<small>MNO</small>
-        </p>
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>GHI</small>}
+          value='4'
+        />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>JKL</small>}
+          value='5'
+        />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>MNO</small>}
+          value='6'
+        />
       </div>
       <div className='modal__board--row'>
-        <p className='modal__board--num'>
-          7<small>PQRS</small>
-        </p>
-        <p className='modal__board--num'>
-          8<small>TUV</small>
-        </p>
-        <p className='modal__board--num'>
-          9<small>WXYZ</small>
-        </p>
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>PQRS</small>}
+          value='7'
+        />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>TUV</small>}
+          value='8'
+        />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>WXYZ</small>}
+          value='9'
+        />
       </div>
       <div className='modal__board--row'>
-        <p className='modal__board--num'>*</p>
-        <p className='modal__board--num'>
-          0<small>+</small>
-        </p>
-        <p className='modal__board--num'>#</p>
+        <NumberButton onClick={onClick} value='*' />
+        <NumberButton
+          onClick={onClick}
+          btmContent={<small>+</small>}
+          value='0'
+        />
+        <NumberButton onClick={onClick} value='#' />
       </div>
       <div className='modal__board--row'>
-        <p className='modal__board--call'>
-          <FiPhone color={color} size={size} />
-          Call
-        </p>
-        <p className='modal__board--clear'>
+        <button className='modal__board--btn clear' onClick={onClear}>
           <LuDelete color={color} size={size} />
-          Clear
-        </p>
+          <span>Clear</span>
+        </button>
+        <button className='modal__board--btn call' onClick={onCallClick}>
+          <FiPhone color={colors.main[100]} size={size} />
+          <span>Call</span>
+        </button>
       </div>
     </div>
   );
@@ -133,6 +172,9 @@ Field.propTypes = {
 
 NumberBoard.propTypes = {
   className: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  onCallClick: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
 };
 
 Button.propTypes = {
