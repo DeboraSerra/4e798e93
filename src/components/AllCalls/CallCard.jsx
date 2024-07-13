@@ -7,7 +7,8 @@ import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
 import { VscCallIncoming } from "react-icons/vsc";
 import colors from "../../utils/colors";
 import Card from "../card.jsx";
-import { modal } from "../modal.jsx"
+import { activeType } from "../Header/index.jsx";
+import { modal } from "../modal.jsx";
 
 const size = 20;
 
@@ -17,7 +18,14 @@ const CallType = {
   voicemail: <MdVoicemail color={colors.main[900]} size={size} />,
 };
 
-const CallCard = ({ call, moreInfo, setMoreInfo, setShowModal, setPhone }) => {
+const CallCard = ({
+  call,
+  moreInfo,
+  setMoreInfo,
+  setShowModal,
+  setPhone,
+  active,
+}) => {
   const handleMoreInfoClick = () => {
     if (moreInfo === call.id) {
       setMoreInfo("");
@@ -55,7 +63,9 @@ const CallCard = ({ call, moreInfo, setMoreInfo, setShowModal, setPhone }) => {
           </Card.Button>
           <Card.Button onClick={() => setShowModal(modal.archiveOne)}>
             <FiArchive color={colors.main[900]} size={size} />
-            <Card.Text>Archive call</Card.Text>
+            <Card.Text>
+              {active === activeType.all ? "Archive" : "Retrieve"} call
+            </Card.Text>
           </Card.Button>
         </Card.Body>
       ) : null}
@@ -81,4 +91,5 @@ CallCard.propTypes = {
   setMoreInfo: PropTypes.func.isRequired,
   setShowModal: PropTypes.func.isRequired,
   setPhone: PropTypes.func.isRequired,
+  active: PropTypes.oneOf(Object.values(activeType)),
 };

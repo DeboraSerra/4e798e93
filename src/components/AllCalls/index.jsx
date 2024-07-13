@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CallCard from "./CallCard.jsx";
 
-const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone }) => {
+const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone, active }) => {
   return (
     <div className='main'>
       <h1 className='main__title'>{title}</h1>
@@ -20,6 +20,7 @@ const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone 
                     setMoreInfo={setMoreInfo}
                     setShowModal={setShowModal}
                     setPhone={setPhone}
+                    active={active}
                   />
                 ))}
               </div>

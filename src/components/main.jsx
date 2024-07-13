@@ -36,7 +36,7 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
     setActive(activeType.all);
     setShowModal(modal.none);
     setMoreInfo("");
-    await api.archiveActivity(moreInfo);
+    await api.archiveActivity(moreInfo, active === activeType.all);
     const newCalls = await getCalls(false);
     setCalls(newCalls);
   };
@@ -63,6 +63,7 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
         title={active === activeType.archive ? "Archived Calls" : "All Calls"}
         setShowModal={setShowModal}
         setPhone={setPhone}
+        active={active}
       />
       {showModal === modal.archive ? (
         <Modal>
@@ -134,7 +135,10 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
       {showModal === modal.archiveOne ? (
         <Modal>
           <Modal.Content>
-            <p className='main__text'>Do you want to archive this call?</p>
+            <p className='main__text'>
+              Do you want to{" "}
+              {active === activeType.all ? "archive" : "retrieve"} this call?
+            </p>
             <div className='main__desc'>
               <p className='main__desc--text'>
                 <strong>Call from:</strong> {call.from}

@@ -27,7 +27,7 @@ const Footer = ({ setActive, setShowModal }) => {
       <Card.Button onClick={() => setShowModal(modal.retrieve)}>
         <RiInboxUnarchiveLine color={colorMain} size={size} />
       </Card.Button>
-      <Card.Button onClick={() => {}}>
+      <Card.Button onClick={() => setShowModal(modal.callFail)}>
         <GiSettingsKnobs color={colorMain} size={size} />
       </Card.Button>
     </footer>
