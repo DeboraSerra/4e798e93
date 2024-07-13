@@ -1,47 +1,17 @@
-import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
-import { api } from "../../utils/api.js";
+import React, { useState } from "react";
 import CallCard from "./CallCard.jsx";
 
-const ArchivedCalls = () => {
-  const [calls, setCalls] = useState([]);
+const ArchivedCalls = ({ calls }) => {
   const [moreInfo, setMoreInfo] = useState("");
 
-  const getCalls = async () => {
-    const result = await api.getActivities();
-    const obj = [];
-    result
-      .filter((call) => call.is_archived)
-      .forEach((call) => {
-        if (!obj.some((o) => dayjs(o.date).isSame(call.created_at, "day"))) {
-          const date = dayjs(call.created_at).format("MMMM[, ]DD YYYY");
-          const newCall = {
-            date,
-            calls: [call],
-          };
-          obj.push(newCall);
-        } else {
-          const index = obj.findIndex((o) =>
-            dayjs(o.date).isSame(call.created_at, "day")
-          );
-          obj[index].calls.push(call);
-        }
-      });
-    setCalls(obj);
-  };
-
-  useEffect(() => {
-    getCalls();
-  }, []);
-
   return (
-    <div>
-      <h1>Archived Calls</h1>
-      <div>
+    <div className='main'>
+      <h1 className='main__title'>Archived Calls</h1>
+      <div className='main__calls'>
         {calls.map((dates) => (
-          <div key={dates.date}>
-            <div>
-              <h2>{dates.date}</h2>
+          <div key={dates.date} className='main__dates'>
+            <h2 className='main__subtitle'>{dates.date}</h2>
+            <div className='main__calls--container'>
               {dates.calls.map((call) => (
                 <CallCard
                   key={call.id}

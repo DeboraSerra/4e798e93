@@ -6,12 +6,14 @@ import { FiArchive, FiPhoneCall } from "react-icons/fi";
 import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
 import { VscCallIncoming } from "react-icons/vsc";
 import colors from "../../utils/colors";
-import Card from "../Card/index.jsx";
+import Card from "../card.jsx";
+
+const size = 20
 
 const CallType = {
-  missed: <MdOutlinePhoneMissed color={colors.red} />,
-  answered: <VscCallIncoming color={colors.accent[700]} />,
-  voicemail: <MdVoicemail color={colors.main[900]} />,
+  missed: <MdOutlinePhoneMissed color={colors.red} size={size} />,
+  answered: <VscCallIncoming color={colors.accent[700]} size={size} />,
+  voicemail: <MdVoicemail color={colors.main[900]} size={size} />,
 };
 
 const CallCard = ({ call, moreInfo, setMoreInfo }) => {
@@ -35,17 +37,17 @@ const CallCard = ({ call, moreInfo, setMoreInfo }) => {
       {moreInfo === call.id ? (
         <Card.Body>
           <Card.Button>
-            <FiPhoneCall color={colors.main[900]} />
+            <FiPhoneCall color={colors.main[900]} size={size} />
             <Card.Text>
               {call.direction === "inbound" ? "Call back" : "Try again"}
             </Card.Text>
           </Card.Button>
           <Card.Button>
-            <BiMessageDetail color={colors.main[900]} />
+            <BiMessageDetail color={colors.main[900]} size={size} />
             <Card.Text>Send message</Card.Text>
           </Card.Button>
           <Card.Button>
-            <FiArchive color={colors.main[900]} />
+            <FiArchive color={colors.main[900]} size={size} />
             <Card.Text>Archive call</Card.Text>
           </Card.Button>
         </Card.Body>
