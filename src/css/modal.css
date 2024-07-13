@@ -31,6 +31,19 @@
   align-items: end;
 }
 
+@keyframes scrollUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modal.drawer .modal__content.show {
+  animation: scrollUp 0.3s ease-in;
+}
 .modal.drawer .modal__content {
   background-color: var(--main-100);
   width: 100%;
@@ -121,7 +134,7 @@
 
 .modal__board--btn {
   border: none;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;

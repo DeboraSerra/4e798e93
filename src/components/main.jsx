@@ -41,7 +41,7 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
       {active === activeType.all ? <AllCalls calls={calls} /> : null}
       {showModal === modal.archive ? (
         <Modal>
-          <Modal.Content>
+          <Modal.Content setShowModal={setShowModal}>
             <p className='main__text'>Do you want to archive all calls?</p>
             <div className='main__btn--container'>
               <Modal.Button
@@ -60,7 +60,7 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
 
       {showModal === modal.retrieve ? (
         <Modal>
-          <Modal.Content>
+          <Modal.Content setShowModal={setShowModal}>
             <p className='main__text'>Do you want to retrieve all calls?</p>
             <div className='main__btn--container'>
               <Modal.Button
@@ -79,7 +79,10 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
 
       {showModal === modal.call ? (
         <Modal variant='secondary'>
-          <Modal.Content className={showModal === modal.call ? "show" : "hide"}>
+          <Modal.Content
+            className={showModal === modal.call ? "show": ""}
+            setShowModal={setShowModal}
+          >
             <Modal.Field value={phone} setValue={setPhone} />
             <Modal.NumberBoard
               onClick={(value) => setPhone((prev) => maskPhone(prev + value))}
@@ -92,7 +95,7 @@ const Main = ({ active, showModal, setShowModal, setActive }) => {
 
       {showModal === modal.callFail ? (
         <Modal>
-          <Modal.Content>
+          <Modal.Content setShowModal={setShowModal}>
             <p className='main__text'>Sorry...</p>
             <p className='main__text'>
               This function isn&apos;t available yet :(

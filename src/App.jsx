@@ -16,7 +16,7 @@ export const modal = {
 
 const App = () => {
   const [active, setActive] = useState(activeType.all);
-  const [showModal, setShowModal] = useState(modal.call);
+  const [showModal, setShowModal] = useState(modal.none);
 
   return (
     <div className='container'>

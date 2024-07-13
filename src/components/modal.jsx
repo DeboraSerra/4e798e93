@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { FiPhone } from "react-icons/fi";
 import { LuDelete } from "react-icons/lu";
 import { MdVoicemail } from "react-icons/md";
+import { modal } from "../App.jsx";
 import colors from "../utils/colors";
 import { maskPhone } from "../utils/maskPhone";
 
@@ -22,8 +23,25 @@ const Modal = ({ children, variant = "primary", className }) => {
   );
 };
 
-const Content = ({ children, className }) => {
-  return <div className={`modal__content ${className ?? ""}`}>{children}</div>;
+const Content = ({ children, className, setShowModal }) => {
+  const modalRef = useRef();
+
+  useEffect(() => {
+    const clickOut = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        setShowModal(modal.none);
+      }
+    };
+
+    window.addEventListener("click", clickOut);
+    return () => clickOut("click", clickOut);
+  }, []);
+
+  return (
+    <div ref={modalRef} className={`modal__content ${className ?? ""}`}>
+      {children}
+    </div>
+  );
 };
 
 const Button = ({ children, className, onClick }) => {
@@ -160,12 +178,13 @@ Modal.propTypes = {
 };
 
 Content.propTypes = {
+  setShowModal: PropTypes.func.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
 };
 
 Field.propTypes = {
-  setValue: PropTypes.func,
+  setValue: PropTypes.func.isRequired,
   value: PropTypes.string,
   className: PropTypes.string,
 };
@@ -180,5 +199,5 @@ NumberBoard.propTypes = {
 Button.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
 };
