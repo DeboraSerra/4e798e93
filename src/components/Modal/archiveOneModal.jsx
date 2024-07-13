@@ -1,10 +1,23 @@
 import dayjs from "dayjs";
 import { useContext } from "react";
 import { activeType, context, modal } from "../../utils/context.jsx";
+import Loading from "../loading.jsx";
 import Modal from "./modal.jsx";
 
 const ArchiveOneModal = () => {
-  const { active, call, handleArchiveOneCall, setState } = useContext(context);
+  const { active, call, handleArchiveOneCall, setState, isLoading } =
+    useContext(context);
+
+  if (isLoading) {
+    return (
+      <Modal>
+        <Modal.Content>
+          <Loading />
+        </Modal.Content>
+      </Modal>
+    );
+  }
+
   return (
     <Modal>
       <Modal.Content>

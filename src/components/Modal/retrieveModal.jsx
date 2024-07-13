@@ -1,9 +1,21 @@
 import { useContext } from "react";
 import { context, modal } from "../../utils/context.jsx";
+import Loading from "../loading.jsx";
 import Modal from "./modal.jsx";
 
 const RetrieveModal = () => {
-  const { handleRetrieveCalls, setState } = useContext(context);
+  const { handleRetrieveCalls, setState, isLoading } = useContext(context);
+
+  if (isLoading) {
+    return (
+      <Modal>
+        <Modal.Content>
+          <Loading />
+        </Modal.Content>
+      </Modal>
+    );
+  }
+
   return (
     <Modal>
       <Modal.Content>

@@ -1,10 +1,22 @@
 import React, { useContext } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
+import colors from "../../utils/colors.js";
 import { context } from "../../utils/context.jsx";
 import CallCard from "./CallCard.jsx";
 
 const AllCalls = ({ title }) => {
   const { calls, isLoading } = useContext(context);
-  if (isLoading) return <p>Loading</p>
+
+  if (isLoading)
+    return (
+      <div className='loading__container'>
+        <AiOutlineLoading
+          color={colors.accent[800]}
+          size={40}
+          className='loading'
+        />
+      </div>
+    );
 
   return (
     <div className='main'>

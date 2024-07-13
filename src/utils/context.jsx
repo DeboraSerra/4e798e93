@@ -46,17 +46,19 @@ const Provider = ({ children }) => {
   }, [moreInfo]);
 
   const handleArchiveCalls = async () => {
+    setState(prev => ({...prev, isLoading: true}))
     const newCalls = await archiveCalls(calls);
     setState((prev) => ({
       ...prev,
       calls: newCalls,
       active: activeType.all,
       showModal: modal.none,
+      isLoading: false,
     }));
   };
 
   const handleArchiveOneCall = async () => {
-    console.log({ moreInfo})
+    setState(prev => ({...prev, isLoading: true}))
     await api.archiveActivity(moreInfo, active === activeType.all);
     const newCalls = await getCalls(false);
     setState((prev) => ({
@@ -65,16 +67,19 @@ const Provider = ({ children }) => {
       moreInfo: "",
       active: activeType.all,
       showModal: modal.none,
+      isLoading: false
     }));
   };
 
   const handleRetrieveCalls = async () => {
+    setState(prev => ({...prev, isLoading: true}))
     const newCalls = await retrieveCalls(calls);
     setState((prev) => ({
       ...prev,
       calls: newCalls,
       active: activeType.all,
       showModal: modal.none,
+      isLoading: false
     }));
   };
 

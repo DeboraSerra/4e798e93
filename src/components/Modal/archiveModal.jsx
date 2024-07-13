@@ -1,9 +1,21 @@
 import { useContext } from "react";
 import { context, modal } from "../../utils/context.jsx";
 import Modal from "./modal.jsx";
+import Loading from "../loading.jsx";
 
 const ArchiveModal = () => {
-  const { handleArchiveCalls, setState } = useContext(context);
+  const { handleArchiveCalls, setState, isLoading } = useContext(context);
+
+  if (isLoading) {
+    return (
+      <Modal>
+        <Modal.Content>
+          <Loading />
+        </Modal.Content>
+      </Modal>
+    );
+  }
+
   return (
     <Modal>
       <Modal.Content>
