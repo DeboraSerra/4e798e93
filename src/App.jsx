@@ -3,17 +3,9 @@ import ReactDOM from "react-dom";
 import Footer from "./components/footer.jsx";
 import Header, { activeType } from "./components/Header/index.jsx";
 import Main from "./components/main.jsx";
+import { modal } from "./components/modal.jsx";
 import "./css/allCalls.css";
 import "./css/card.css";
-
-export const modal = {
-  none: 0,
-  archive: 1,
-  retrieve: 2,
-  call: 3,
-  callFail: 4,
-  archiveOne: 5,
-};
 
 const App = () => {
   const [active, setActive] = useState(activeType.all);

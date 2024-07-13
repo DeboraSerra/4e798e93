@@ -1,16 +1,18 @@
+import PropTypes from "prop-types";
+import React from "react";
 import { CgMenuGridO } from "react-icons/cg";
 import { FiPhone } from "react-icons/fi";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { RiInboxArchiveLine, RiInboxUnarchiveLine } from "react-icons/ri";
-import { modal } from "../App.jsx";
 import colors from "../utils/colors.js";
 import Card from "./card.jsx";
 import { activeType } from "./Header/index.jsx";
+import { modal } from "./modal.jsx";
 
 const size = 28;
 const colorMain = colors.main[900];
 
-const Footer = ({ setActive, setShowModal, showModal }) => {
+const Footer = ({ setActive, setShowModal }) => {
   return (
     <footer className='footer'>
       <Card.Button onClick={() => setShowModal(modal.call)}>
@@ -25,7 +27,7 @@ const Footer = ({ setActive, setShowModal, showModal }) => {
       <Card.Button onClick={() => setShowModal(modal.retrieve)}>
         <RiInboxUnarchiveLine color={colorMain} size={size} />
       </Card.Button>
-      <Card.Button>
+      <Card.Button onClick={() => {}}>
         <GiSettingsKnobs color={colorMain} size={size} />
       </Card.Button>
     </footer>
@@ -33,3 +35,8 @@ const Footer = ({ setActive, setShowModal, showModal }) => {
 };
 
 export default Footer;
+
+Footer.propTypes = {
+  setActive: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+};

@@ -5,9 +5,9 @@ import { BiMessageDetail } from "react-icons/bi";
 import { FiArchive, FiPhoneCall } from "react-icons/fi";
 import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
 import { VscCallIncoming } from "react-icons/vsc";
-import { modal } from "../../App.jsx";
 import colors from "../../utils/colors";
 import Card from "../card.jsx";
+import { modal } from "../modal.jsx"
 
 const size = 20;
 
@@ -76,7 +76,9 @@ CallCard.propTypes = {
     call_type: PropTypes.oneOf(["missed", "answered", "voicemail"]),
     id: PropTypes.string,
     created_at: PropTypes.string,
-  }),
-  moreInfo: PropTypes.string,
-  setMoreInfo: PropTypes.func,
+  }).isRequired,
+  moreInfo: PropTypes.string.isRequired,
+  setMoreInfo: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  setPhone: PropTypes.func.isRequired,
 };

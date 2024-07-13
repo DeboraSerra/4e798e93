@@ -50,7 +50,7 @@ Card.propTypes = {
 Content.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
 };
 
 Text.propTypes = {
@@ -61,7 +61,7 @@ Text.propTypes = {
 Button.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
 };
 
 Body.propTypes = {
