@@ -23,22 +23,10 @@ const Modal = ({ children, variant = "primary", className }) => {
   );
 };
 
-const Content = ({ children, className, setShowModal }) => {
-  const modalRef = useRef();
-
-  useEffect(() => {
-    const clickOut = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setShowModal(modal.none);
-      }
-    };
-
-    window.addEventListener("click", clickOut);
-    return () => clickOut("click", clickOut);
-  }, []);
+const Content = ({ children, className }) => {
 
   return (
-    <div ref={modalRef} className={`modal__content ${className ?? ""}`}>
+    <div className={`modal__content ${className ?? ""}`}>
       {children}
     </div>
   );
@@ -178,7 +166,6 @@ Modal.propTypes = {
 };
 
 Content.propTypes = {
-  setShowModal: PropTypes.func.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
 };
