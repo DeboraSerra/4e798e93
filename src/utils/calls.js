@@ -30,7 +30,7 @@ export const archiveCalls = async (calls) => {
     calls.map(async ({ calls }) => {
       return await Promise.all(
         calls.map(async ({ id }) => {
-          const call = await api.archiveActivity(id);
+          const call = await api.archiveActivity(id, true);
           return call;
         })
       );

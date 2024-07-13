@@ -1,8 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
+import { context } from "../../utils/context.jsx";
 import CallCard from "./CallCard.jsx";
 
-const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone, active }) => {
+const AllCalls = ({ title }) => {
+  const { calls, isLoading } = useContext(context);
+  if (isLoading) return <p>Loading</p>
+
   return (
     <div className='main'>
       <h1 className='main__title'>{title}</h1>
@@ -13,15 +16,7 @@ const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone,
               <h2 className='main__subtitle'>{dates.date}</h2>
               <div className='main__calls--container'>
                 {dates.calls.map((call) => (
-                  <CallCard
-                    key={call.id}
-                    call={call}
-                    moreInfo={moreInfo}
-                    setMoreInfo={setMoreInfo}
-                    setShowModal={setShowModal}
-                    setPhone={setPhone}
-                    active={active}
-                  />
+                  <CallCard key={call.id} call={call} />
                 ))}
               </div>
             </div>
@@ -37,24 +32,3 @@ const AllCalls = ({ calls, moreInfo, setMoreInfo, title, setShowModal, setPhone,
 };
 
 export default AllCalls;
-
-AllCalls.propTypes = {
-  calls: PropTypes.arrayOf(PropTypes.exact({
-    date: PropTypes.string,
-    calls: PropTypes.arrayOf(PropTypes.exact({
-      direction: PropTypes.oneOf(["inbound", "outbound"]),
-      from: PropTypes.number,
-      to: PropTypes.number,
-      via: PropTypes.number,
-      duration: PropTypes.number,
-      is_archived: PropTypes.bool,
-      call_type: PropTypes.oneOf(["missed", "answered", "voicemail"]),
-      id: PropTypes.string,
-      created_at: PropTypes.string,
-    }))
-  })).isRequired,
-  moreInfo: PropTypes.string.isRequired,
-  setMoreInfo: PropTypes.func.isRequired,
-  setShowModal: PropTypes.func.isRequired,
-  setPhone: PropTypes.func.isRequired,
-};

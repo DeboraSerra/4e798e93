@@ -1,34 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import Footer from "./components/footer.jsx";
-import Header, { activeType } from "./components/Header/index.jsx";
+import Header from "./components/Header/index.jsx";
 import Main from "./components/main.jsx";
-import { modal } from "./components/modal.jsx";
 import "./css/allCalls.css";
 import "./css/card.css";
+import Provider from "./utils/context.jsx";
 
 const App = () => {
-  const [active, setActive] = useState(activeType.all);
-  const [showModal, setShowModal] = useState(modal.none);
-
   return (
-    <div className='container'>
-      <Header active={active} setActive={setActive} />
-      <div className='container-view'>
-        <Main
-          active={active}
-          setShowModal={setShowModal}
-          showModal={showModal}
-          setActive={setActive}
-        />
+    <Provider>
+      <div className='container'>
+        <Header />
+        <div className='container-view'>
+          <Main />
+        </div>
+        <Footer />
       </div>
-      <Footer
-        active={active}
-        setActive={setActive}
-        showModal={showModal}
-        setShowModal={setShowModal}
-      />
-    </div>
+    </Provider>
   );
 };
 

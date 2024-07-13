@@ -1,15 +1,13 @@
 import dayjs from "dayjs";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import React from "react";
 import { BiMessageDetail } from "react-icons/bi";
 import { FiArchive, FiPhoneCall } from "react-icons/fi";
 import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
 import { VscCallIncoming } from "react-icons/vsc";
 import colors from "../../utils/colors";
+import { activeType, context, modal } from "../../utils/context.jsx";
 import Card from "../card.jsx";
-import { activeType } from "../Header/index.jsx";
-import { modal } from "../Modal/modal.jsx";
-
 const size = 20;
 
 const CallType = {
@@ -18,18 +16,14 @@ const CallType = {
   voicemail: <MdVoicemail color={colors.main[900]} size={size} />,
 };
 
-const CallCard = ({
-  call,
-  moreInfo,
-  setMoreInfo,
-  setShowModal,
-  setPhone,
-  active,
-}) => {
+const CallCard = ({ call }) => {
+  const { moreInfo, active, setState } = useContext(context);
   const handleMoreInfoClick = () => {
+    let id;
     if (moreInfo === call.id) {
-      setMoreInfo("");
-    } else setMoreInfo(call.id);
+      id = "";
+    } else id = call.id;
+    setState((prev) => ({ ...prev, moreInfo: id }));
   };
 
   return (
@@ -48,8 +42,11 @@ const CallCard = ({
         <Card.Body>
           <Card.Button
             onClick={() => {
-              setShowModal(modal.call);
-              setPhone(String(call.to));
+              setState((prev) => ({
+                ...prev,
+                phone: String(call.to),
+                showModal: modal.call,
+              }));
             }}
           >
             <FiPhoneCall color={colors.main[900]} size={size} />
@@ -57,11 +54,19 @@ const CallCard = ({
               {call.direction === "inbound" ? "Call back" : "Try again"}
             </Card.Text>
           </Card.Button>
-          <Card.Button onClick={() => setShowModal(modal.callFail)}>
+          <Card.Button
+            onClick={() =>
+              setState((prev) => ({ ...prev, showModal: modal.callFail }))
+            }
+          >
             <BiMessageDetail color={colors.main[900]} size={size} />
             <Card.Text>Send message</Card.Text>
           </Card.Button>
-          <Card.Button onClick={() => setShowModal(modal.archiveOne)}>
+          <Card.Button
+            onClick={() =>
+              setState((prev) => ({ ...prev, showModal: modal.archiveOne }))
+            }
+          >
             <FiArchive color={colors.main[900]} size={size} />
             <Card.Text>
               {active === activeType.all ? "Archive" : "Retrieve"} call
@@ -87,9 +92,4 @@ CallCard.propTypes = {
     id: PropTypes.string,
     created_at: PropTypes.string,
   }).isRequired,
-  moreInfo: PropTypes.string.isRequired,
-  setMoreInfo: PropTypes.func.isRequired,
-  setShowModal: PropTypes.func.isRequired,
-  setPhone: PropTypes.func.isRequired,
-  active: PropTypes.oneOf(Object.values(activeType)),
 };

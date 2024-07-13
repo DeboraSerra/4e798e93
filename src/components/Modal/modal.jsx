@@ -14,15 +14,6 @@ const classNameByVariant = {
   secondary: "drawer",
 };
 
-export const modal = {
-  none: 0,
-  archive: 1,
-  retrieve: 2,
-  call: 3,
-  callFail: 4,
-  archiveOne: 5,
-};
-
 const Modal = ({ children, variant = "primary", className }) => {
   return (
     <div className={`${className ?? ""} ${classNameByVariant[variant]} modal`}>
