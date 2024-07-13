@@ -20,7 +20,14 @@ const App = () => {
   return (
     <div className='container'>
       <Header active={active} setActive={setActive} />
-      <Main active={active} setShowModal={setShowModal} showModal={showModal} />
+      <div className='container-view'>
+        <Main
+          active={active}
+          setShowModal={setShowModal}
+          showModal={showModal}
+          setActive={setActive}
+        />
+      </div>
       <Footer
         active={active}
         setActive={setActive}

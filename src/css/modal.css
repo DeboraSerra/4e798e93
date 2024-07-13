@@ -1,0 +1,48 @@
+@import url(./app.css);
+
+.modal {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  padding-top: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: calc(100% + 40px);
+  height: calc(100% + 100px);
+  min-height: var(--height);
+  z-index: 5;
+}
+
+.modal.alert .modal__content {
+  background-color: var(--main-100);
+  width: 80%;
+  height: 40%;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal__btn:hover {
+  opacity: 0.7;
+}
+
+.modal__btn.cancel{
+  color: var(--red);
+}
+
+.modal__btn.confirm{
+  color: var(--green);
+}

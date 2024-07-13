@@ -228,8 +228,13 @@ const server = axios.create({
 });
 
 const getActivities = async () => {
-  const { data } = await server.get("/activities");
-  return data;
+  try {
+    const { data } = await server.get("/activities");
+    return data;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 };
 
 const getActivityById = async (id) => {
@@ -238,17 +243,23 @@ const getActivityById = async (id) => {
 };
 
 const archiveActivity = async (id) => {
-  const { data } = await server.patch(`/activities/${id}`, {
-    data: {
+  try {
+    const { data } = await server.patch(`/activities/${id}`, {
       is_archived: true,
-    },
-  });
-  return data;
+    });
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const retrieveAllActivities = async () => {
-  const { data } = await server.patch(`/reset`);
-  return data;
+  try {
+    const { data } = await server.patch(`/reset`);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const api = {

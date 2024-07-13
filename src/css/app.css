@@ -1,7 +1,7 @@
 :root {
   --red: #f00;
   --green: #2ac420;
-  --white:#fff;
+  --white: #fff;
   --main-100: #f1f1f1;
   --main-200: #e6e6e6;
   --main-300: #c7c7c7;
@@ -29,6 +29,8 @@
   --accent-700: #11800a;
   --accent-800: #095704;
   --accent-900: #043001;
+
+  --height: 580px;
 }
 
 * {
@@ -74,8 +76,8 @@
 
 #app .container-view {
   padding: 20px 20px 32px;
-  max-height: 580px;
-  min-height: 580px;
+  max-height: var(--height);
+  min-height: var(--height);
   overflow-y: auto;
   background-color: var(--main-200);
 }
