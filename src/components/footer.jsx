@@ -1,33 +1,46 @@
-import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import { CgMenuGridO } from "react-icons/cg";
-import { FiPhone } from "react-icons/fi";
 import { GiSettingsKnobs } from "react-icons/gi";
-import { RiInboxArchiveLine, RiInboxUnarchiveLine } from "react-icons/ri";
+import {
+  RiInboxArchiveLine,
+  RiInboxUnarchiveLine,
+  RiUserAddLine,
+} from "react-icons/ri";
 import colors from "../utils/colors.js";
+import { context, modal } from "../utils/context.jsx";
 import Card from "./card.jsx";
-import { activeType } from "./Header/index.jsx";
-import { modal } from "./modal.jsx";
 
 const size = 28;
 const colorMain = colors.main[900];
 
-const Footer = ({ setActive, setShowModal }) => {
+const Footer = () => {
+  const { setState } = useContext(context);
+  const handleOpenModal = (type) => {
+    setState((prev) => ({
+      ...prev,
+      showModal: prev.showModal === type ? modal.none : type,
+    }));
+  };
   return (
     <footer className='footer'>
-      <Card.Button onClick={() => setShowModal(modal.call)}>
-        <FiPhone color={colorMain} size={size} />
+      <Card.Button onClick={() => handleOpenModal(modal.callFail)}>
+        <RiUserAddLine color={colorMain} size={size} />
       </Card.Button>
-      <Card.Button onClick={() => setShowModal(modal.archive)}>
+      <Card.Button onClick={() => handleOpenModal(modal.archive)}>
         <RiInboxArchiveLine color={colorMain} size={size} />
       </Card.Button>
-      <Card.Button className='menu' onClick={() => setActive(activeType.all)}>
+      <Card.Button
+        className='menu'
+        onClick={() => {
+          handleOpenModal(modal.call);
+        }}
+      >
         <CgMenuGridO color={colors.main[100]} size={size * 1.5} />
       </Card.Button>
-      <Card.Button onClick={() => setShowModal(modal.retrieve)}>
+      <Card.Button onClick={() => handleOpenModal(modal.retrieve)}>
         <RiInboxUnarchiveLine color={colorMain} size={size} />
       </Card.Button>
-      <Card.Button onClick={() => {}}>
+      <Card.Button onClick={() => handleOpenModal(modal.callFail)}>
         <GiSettingsKnobs color={colorMain} size={size} />
       </Card.Button>
     </footer>
@@ -35,8 +48,3 @@ const Footer = ({ setActive, setShowModal }) => {
 };
 
 export default Footer;
-
-Footer.propTypes = {
-  setActive: PropTypes.func.isRequired,
-  setShowModal: PropTypes.func.isRequired,
-};

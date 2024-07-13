@@ -1,13 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
+import { activeType, context } from "../../utils/context.jsx";
 import Logo from "./logo.jsx";
 
-export const activeType = {
-  all: 0,
-  archive: 1,
-};
-
-const Header = ({ active, setActive }) => {
+const Header = () => {
+  const { active, setState } = useContext(context);
   return (
     <header>
       <Logo />
@@ -18,7 +14,9 @@ const Header = ({ active, setActive }) => {
               active === activeType.all ? "active" : ""
             }`}
             role='button'
-            onClick={() => setActive(activeType.all)}
+            onClick={() =>
+              setState((prev) => ({ ...prev, active: activeType.all }))
+            }
           >
             Inbox
           </li>
@@ -27,7 +25,9 @@ const Header = ({ active, setActive }) => {
               active === activeType.archive ? "active" : ""
             }`}
             role='button'
-            onClick={() => setActive(activeType.archive)}
+            onClick={() =>
+              setState((prev) => ({ ...prev, active: activeType.archive }))
+            }
           >
             Archived calls
           </li>
@@ -38,8 +38,3 @@ const Header = ({ active, setActive }) => {
 };
 
 export default Header;
-
-Header.propTypes = {
-  active: PropTypes.oneOf(Object.values(activeType)),
-  setActive: PropTypes.func,
-};

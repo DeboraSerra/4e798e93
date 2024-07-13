@@ -242,10 +242,10 @@ const getActivityById = async (id) => {
   return data;
 };
 
-const archiveActivity = async (id) => {
+const archiveActivity = async (id, is_archived) => {
   try {
     const { data } = await server.patch(`/activities/${id}`, {
-      is_archived: true,
+      is_archived,
     });
     return data;
   } catch (e) {
