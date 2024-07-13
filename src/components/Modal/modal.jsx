@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { FiPhone } from "react-icons/fi";
 import { LuDelete } from "react-icons/lu";
 import { MdVoicemail } from "react-icons/md";
 import colors from "../../utils/colors";
+import { context, modal } from "../../utils/context.jsx";
 import { maskPhone } from "../../utils/maskPhone";
 
 const size = 28;
@@ -23,7 +24,28 @@ const Modal = ({ children, variant = "primary", className }) => {
 };
 
 const Content = ({ children, className }) => {
-  return <div className={`modal__content ${className ?? ""}`}>{children}</div>;
+  const modalRef = useRef();
+  const { setState } = useContext(context);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        setState((prev) => ({ ...prev, showModal: modal.none }));
+
+        if (e.target.className.includes(".call")) {
+          setState((prev) => ({ ...prev, showModal: modal.callFail }));
+        }
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("click", handleClickOutside);
+  }, []);
+  return (
+    <div ref={modalRef} className={`modal__content ${className ?? ""}`}>
+      {children}
+    </div>
+  );
 };
 
 const Button = ({ children, className, onClick }) => {
@@ -67,7 +89,7 @@ const NumberButton = ({ value, btmContent, onClick }) => {
 
 const NumberBoard = ({ className, onClick, onCallClick, onClear }) => {
   return (
-    <div className={`modal__board ${className ?? ""}`}>
+    <div className={`modal__board ${className ?? ""}`} id='numpad'>
       <div className='modal__board--row'>
         <NumberButton
           onClick={onClick}
