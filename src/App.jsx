@@ -1,22 +1,33 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import ArchivedCalls from "./components/AllCalls/ArchivedCalls.jsx";
-import AllCalls from "./components/AllCalls/index.jsx";
-import Header from "./components/Header/index.jsx";
+import Footer from "./components/footer.jsx";
+import Header, { activeType } from "./components/Header/index.jsx";
+import Main from "./components/main.jsx";
 import "./css/allCalls.css";
 import "./css/card.css";
 
+export const modal = {
+  none: 0,
+  archive: 1,
+  retrieve: 2,
+  call: 3,
+};
+
 const App = () => {
-  const [active, setActive] = useState("all");
+  const [active, setActive] = useState(activeType.all);
+  const [showModal, setShowModal] = useState(modal.none);
 
   return (
-      <div className='container'>
-        <Header active={active} setActive={setActive} />
-        <div className='container-view'>
-          {active === "archive" ? <ArchivedCalls /> : null}
-          {active === "all" ? <AllCalls /> : null}
-        </div>
-      </div>
+    <div className='container'>
+      <Header active={active} setActive={setActive} />
+      <Main active={active} setShowModal={setShowModal} showModal={showModal} />
+      <Footer
+        active={active}
+        setActive={setActive}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
+    </div>
   );
 };
 
