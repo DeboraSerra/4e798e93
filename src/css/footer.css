@@ -13,7 +13,8 @@
   max-width: 376px;
   justify-content: space-around;
   border-radius: 0 0 3px 3px;
-  
+  position: relative;
+  bottom: 36px;
 }
 
 .card__btn.menu {
