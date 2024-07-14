@@ -15,12 +15,14 @@ const colorMain = colors.main[900];
 
 const Footer = () => {
   const { setState } = useContext(context);
+
   const handleOpenModal = (type) => {
     setState((prev) => ({
       ...prev,
       showModal: prev.showModal === type ? modal.none : type,
     }));
   };
+
   return (
     <footer className='footer'>
       <Card.Button onClick={() => handleOpenModal(modal.callFail)}>

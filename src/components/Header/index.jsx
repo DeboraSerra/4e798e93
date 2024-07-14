@@ -4,6 +4,7 @@ import Logo from "./logo.jsx";
 
 const Header = () => {
   const { active, setState } = useContext(context);
+
   return (
     <header>
       <Logo />

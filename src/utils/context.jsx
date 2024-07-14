@@ -16,19 +16,28 @@ export const modal = {
   archiveOne: 5,
 };
 
-export const context = createContext({});
+const defaultState = {
+  calls: [],
+  phone: "",
+  call: {},
+  moreInfo: "",
+  active: activeType.all,
+  showModal: modal.none,
+  isLoading: true,
+};
+
+export const context = createContext({
+  ...defaultState,
+  handleArchiveCalls: () => {},
+  handleArchiveOneCall: () => {},
+  handleOnCall: () => {},
+  handleRetrieveCalls: () => {},
+  setState: ({}) => {},
+});
 
 const Provider = ({ children }) => {
-  const [state, setState] = useState({
-    calls: [],
-    phone: "",
-    call: {},
-    moreInfo: "",
-    active: activeType.all,
-    showModal: modal.none,
-    isLoading: true,
-  });
-  const { active, calls, moreInfo, phone} = state
+  const [state, setState] = useState(defaultState);
+  const { active, calls, moreInfo, phone } = state;
 
   useEffect(() => {
     getCalls(active === activeType.all ? false : true).then((result) =>
@@ -46,7 +55,7 @@ const Provider = ({ children }) => {
   }, [moreInfo]);
 
   const handleArchiveCalls = async () => {
-    setState(prev => ({...prev, isLoading: true}))
+    setState((prev) => ({ ...prev, isLoading: true }));
     const newCalls = await archiveCalls(calls);
     setState((prev) => ({
       ...prev,
@@ -58,7 +67,7 @@ const Provider = ({ children }) => {
   };
 
   const handleArchiveOneCall = async () => {
-    setState(prev => ({...prev, isLoading: true}))
+    setState((prev) => ({ ...prev, isLoading: true }));
     await api.archiveActivity(moreInfo, active === activeType.all);
     const newCalls = await getCalls(false);
     setState((prev) => ({
@@ -67,19 +76,19 @@ const Provider = ({ children }) => {
       moreInfo: "",
       active: activeType.all,
       showModal: modal.none,
-      isLoading: false
+      isLoading: false,
     }));
   };
 
   const handleRetrieveCalls = async () => {
-    setState(prev => ({...prev, isLoading: true}))
+    setState((prev) => ({ ...prev, isLoading: true }));
     const newCalls = await retrieveCalls(calls);
     setState((prev) => ({
       ...prev,
       calls: newCalls,
       active: activeType.all,
       showModal: modal.none,
-      isLoading: false
+      isLoading: false,
     }));
   };
 

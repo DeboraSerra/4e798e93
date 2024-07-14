@@ -5,6 +5,7 @@ import Modal from "./modal.jsx";
 
 const CallModal = () => {
   const { showModal, phone, setState, handleOnCall } = useContext(context);
+
   return (
     <Modal variant='secondary'>
       <Modal.Content className={showModal === modal.call ? "show" : ""}>

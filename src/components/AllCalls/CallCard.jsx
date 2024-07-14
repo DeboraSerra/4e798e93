@@ -18,6 +18,7 @@ const CallType = {
 
 const CallCard = ({ call }) => {
   const { moreInfo, active, setState } = useContext(context);
+
   const handleMoreInfoClick = () => {
     let id;
     if (moreInfo === call.id) {

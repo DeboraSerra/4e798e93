@@ -41,6 +41,7 @@ const Content = ({ children, className }) => {
     window.addEventListener("click", handleClickOutside);
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
+
   return (
     <div ref={modalRef} className={`modal__content ${className ?? ""}`}>
       {children}

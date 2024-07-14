@@ -48,6 +48,6 @@
   cursor: pointer;
 }
 
-.card__btn:hover{
+.card__btn:hover {
   opacity: 0.7;
 }
