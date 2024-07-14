@@ -15,8 +15,13 @@ const getActivities = async () => {
 };
 
 const getActivityById = async (id) => {
-  const { data } = await server.get(`/activities/${id}`);
-  return data;
+  try {
+    const { data } = await server.get(`/activities/${id}`);
+    return data;
+  } catch (e) {
+    console.log(e);
+    return {};
+  }
 };
 
 const archiveActivity = async (id, is_archived) => {
@@ -27,13 +32,13 @@ const archiveActivity = async (id, is_archived) => {
     return data;
   } catch (e) {
     console.log(e);
+    return "Something went wrong";
   }
 };
 
 const retrieveAllActivities = async () => {
   try {
-    const { data } = await server.patch(`/reset`);
-    return data;
+    await server.patch(`/reset`);
   } catch (e) {
     console.log(e);
   }

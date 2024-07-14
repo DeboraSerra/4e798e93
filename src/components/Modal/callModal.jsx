@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { context, modal } from "../../utils/context.jsx";
+import { context, MODAL } from "../../utils/context.jsx";
 import { maskPhone } from "../../utils/maskPhone.js";
 import Modal from "./modal.jsx";
 
@@ -8,7 +8,7 @@ const CallModal = () => {
 
   return (
     <Modal variant='secondary'>
-      <Modal.Content className={showModal === modal.call ? "show" : ""}>
+      <Modal.Content className={showModal === MODAL.call ? "show" : ""}>
         <Modal.Field
           value={phone}
           setValue={(value) => setState((prev) => ({ ...prev, phone: value }))}

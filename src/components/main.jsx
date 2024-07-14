@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { activeType, context, modal } from "../utils/context.jsx";
+import { ACTIVE_TYPE, context, MODAL } from "../utils/context.jsx";
 import AllCalls from "./AllCalls/index.jsx";
 import ArchiveModal from "./Modal/archiveModal.jsx";
 import ArchiveOneModal from "./Modal/archiveOneModal.jsx";
@@ -13,17 +13,17 @@ const Main = () => {
   return (
     <div className='main__container'>
       <AllCalls
-        title={active === activeType.archive ? "Archived Calls" : "All Calls"}
+        title={active === ACTIVE_TYPE.archive ? "Archived Calls" : "All Calls"}
       />
-      {showModal === modal.archive ? <ArchiveModal /> : null}
+      {showModal === MODAL.archive ? <ArchiveModal /> : null}
 
-      {showModal === modal.retrieve ? <RetrieveModal /> : null}
+      {showModal === MODAL.retrieve ? <RetrieveModal /> : null}
 
-      {showModal === modal.call ? <CallModal /> : null}
+      {showModal === MODAL.call ? <CallModal /> : null}
 
-      {showModal === modal.callFail ? <CallFailModal /> : null}
+      {showModal === MODAL.callFail ? <CallFailModal /> : null}
 
-      {showModal === modal.archiveOne ? <ArchiveOneModal /> : null}
+      {showModal === MODAL.archiveOne ? <ArchiveOneModal /> : null}
     </div>
   );
 };
