@@ -3,7 +3,6 @@ import { api } from "./api";
 
 export const getCalls = async (is_archived) => {
   const result = await api.getActivities();
-  //const result = mock;
   const obj = [];
   result
     .filter((call) => call.is_archived === is_archived)

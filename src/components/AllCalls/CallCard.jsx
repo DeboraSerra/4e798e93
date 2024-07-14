@@ -6,18 +6,20 @@ import { FiArchive, FiPhoneCall } from "react-icons/fi";
 import { MdOutlinePhoneMissed, MdVoicemail } from "react-icons/md";
 import { VscCallIncoming } from "react-icons/vsc";
 import colors from "../../utils/colors";
-import { activeType, context, modal } from "../../utils/context.jsx";
+import { ACTIVE_TYPE, context, MODAL } from "../../utils/context.jsx";
 import Card from "../card.jsx";
-const size = 20;
+
+const SIZE = 20;
 
 const CallType = {
-  missed: <MdOutlinePhoneMissed color={colors.red} size={size} />,
-  answered: <VscCallIncoming color={colors.accent[700]} size={size} />,
-  voicemail: <MdVoicemail color={colors.main[900]} size={size} />,
+  missed: <MdOutlinePhoneMissed color={colors.red} size={SIZE} />,
+  answered: <VscCallIncoming color={colors.accent[700]} size={SIZE} />,
+  voicemail: <MdVoicemail color={colors.main[900]} size={SIZE} />,
 };
 
 const CallCard = ({ call }) => {
   const { moreInfo, active, setState } = useContext(context);
+
   const handleMoreInfoClick = () => {
     let id;
     if (moreInfo === call.id) {
@@ -44,31 +46,31 @@ const CallCard = ({ call }) => {
             onClick={() => {
               setState((prev) => ({
                 ...prev,
-                showModal: modal.callFail,
+                showModal: MODAL.callFail,
               }));
             }}
           >
-            <FiPhoneCall color={colors.main[900]} size={size} />
+            <FiPhoneCall color={colors.main[900]} size={SIZE} />
             <Card.Text>
               {call.direction === "inbound" ? "Call back" : "Try again"}
             </Card.Text>
           </Card.Button>
           <Card.Button
             onClick={() =>
-              setState((prev) => ({ ...prev, showModal: modal.callFail }))
+              setState((prev) => ({ ...prev, showModal: MODAL.callFail }))
             }
           >
-            <BiMessageDetail color={colors.main[900]} size={size} />
+            <BiMessageDetail color={colors.main[900]} size={SIZE} />
             <Card.Text>Send message</Card.Text>
           </Card.Button>
           <Card.Button
             onClick={() =>
-              setState((prev) => ({ ...prev, showModal: modal.archiveOne }))
+              setState((prev) => ({ ...prev, showModal: MODAL.archiveOne }))
             }
           >
-            <FiArchive color={colors.main[900]} size={size} />
+            <FiArchive color={colors.main[900]} size={SIZE} />
             <Card.Text>
-              {active === activeType.all ? "Archive" : "Retrieve"} call
+              {active === ACTIVE_TYPE.all ? "Archive" : "Retrieve"} call
             </Card.Text>
           </Card.Button>
         </Card.Body>

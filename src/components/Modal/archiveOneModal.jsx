@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { useContext } from "react";
-import { activeType, context, modal } from "../../utils/context.jsx";
+import { ACTIVE_TYPE, context, MODAL } from "../../utils/context.jsx";
 import Loading from "../loading.jsx";
 import Modal from "./modal.jsx";
 
@@ -22,7 +22,7 @@ const ArchiveOneModal = () => {
     <Modal>
       <Modal.Content>
         <p className='main__text'>
-          Do you want to {active === activeType.all ? "archive" : "retrieve"}{" "}
+          Do you want to {active === ACTIVE_TYPE.all ? "archive" : "retrieve"}{" "}
           this call?
         </p>
         <div className='main__desc'>
@@ -45,7 +45,7 @@ const ArchiveOneModal = () => {
         <div className='main__btn--container'>
           <Modal.Button
             onClick={() =>
-              setState((prev) => ({ ...prev, showModal: modal.none }))
+              setState((prev) => ({ ...prev, showModal: MODAL.none }))
             }
             className='cancel'
           >

@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { context, modal } from "../../utils/context.jsx";
-import Modal from "./modal.jsx";
+import { context, MODAL } from "../../utils/context.jsx";
 import Loading from "../loading.jsx";
+import Modal from "./modal.jsx";
 
 const ArchiveModal = () => {
   const { handleArchiveCalls, setState, isLoading } = useContext(context);
@@ -23,7 +23,7 @@ const ArchiveModal = () => {
         <div className='main__btn--container'>
           <Modal.Button
             onClick={() =>
-              setState((prev) => ({ ...prev, showModal: modal.none }))
+              setState((prev) => ({ ...prev, showModal: MODAL.none }))
             }
             className='cancel'
           >

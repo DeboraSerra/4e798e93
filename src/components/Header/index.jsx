@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { activeType, context } from "../../utils/context.jsx";
+import { ACTIVE_TYPE, context } from "../../utils/context.jsx";
 import Logo from "./logo.jsx";
 
 const Header = () => {
   const { active, setState } = useContext(context);
+
   return (
     <header>
       <Logo />
@@ -11,22 +12,22 @@ const Header = () => {
         <ul>
           <li
             className={`header__link ${
-              active === activeType.all ? "active" : ""
+              active === ACTIVE_TYPE.all ? "active" : ""
             }`}
             role='button'
             onClick={() =>
-              setState((prev) => ({ ...prev, active: activeType.all }))
+              setState((prev) => ({ ...prev, active: ACTIVE_TYPE.all }))
             }
           >
             Inbox
           </li>
           <li
             className={`header__link ${
-              active === activeType.archive ? "active" : ""
+              active === ACTIVE_TYPE.archive ? "active" : ""
             }`}
             role='button'
             onClick={() =>
-              setState((prev) => ({ ...prev, active: activeType.archive }))
+              setState((prev) => ({ ...prev, active: ACTIVE_TYPE.archive }))
             }
           >
             Archived calls

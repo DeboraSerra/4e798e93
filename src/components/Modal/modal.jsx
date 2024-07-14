@@ -4,20 +4,20 @@ import { FiPhone } from "react-icons/fi";
 import { LuDelete } from "react-icons/lu";
 import { MdVoicemail } from "react-icons/md";
 import colors from "../../utils/colors";
-import { context, modal } from "../../utils/context.jsx";
+import { context, MODAL } from "../../utils/context.jsx";
 import { maskPhone } from "../../utils/maskPhone";
 
-const size = 28;
-const color = colors.main[900];
+const SIZE = 28;
+const COLOR = colors.main[900];
 
-const classNameByVariant = {
+const CLASS_NAME_BY_VARIANT = {
   primary: "alert",
   secondary: "drawer",
 };
 
 const Modal = ({ children, variant = "primary", className }) => {
   return (
-    <div className={`${className ?? ""} ${classNameByVariant[variant]} modal`}>
+    <div className={`${className ?? ""} ${CLASS_NAME_BY_VARIANT[variant]} modal`}>
       {children}
     </div>
   );
@@ -30,10 +30,10 @@ const Content = ({ children, className }) => {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setState((prev) => ({ ...prev, showModal: modal.none }));
+        setState((prev) => ({ ...prev, showModal: MODAL.none }));
 
         if (e.target.className.includes(".call")) {
-          setState((prev) => ({ ...prev, showModal: modal.callFail }));
+          setState((prev) => ({ ...prev, showModal: MODAL.callFail }));
         }
       }
     };
@@ -41,6 +41,7 @@ const Content = ({ children, className }) => {
     window.addEventListener("click", handleClickOutside);
     return () => window.removeEventListener("click", handleClickOutside);
   }, []);
+
   return (
     <div ref={modalRef} className={`modal__content ${className ?? ""}`}>
       {children}
@@ -95,7 +96,7 @@ const NumberBoard = ({ className, onClick, onCallClick, onClear }) => {
           onClick={onClick}
           btmContent={
             <small>
-              <MdVoicemail color={color} size={14} />
+              <MdVoicemail color={COLOR} size={14} />
             </small>
           }
           value='1'
@@ -156,11 +157,11 @@ const NumberBoard = ({ className, onClick, onCallClick, onClear }) => {
       </div>
       <div className='modal__board--row'>
         <button className='modal__board--btn clear' onClick={onClear}>
-          <LuDelete color={color} size={size} />
+          <LuDelete color={COLOR} size={SIZE} />
           <span>Clear</span>
         </button>
         <button className='modal__board--btn call' onClick={onCallClick}>
-          <FiPhone color={colors.main[100]} size={size} />
+          <FiPhone color={colors.main[100]} size={SIZE} />
           <span>Call</span>
         </button>
       </div>
@@ -177,7 +178,7 @@ export default Modal;
 
 Modal.propTypes = {
   children: PropTypes.node,
-  variant: PropTypes.oneOf(Object.keys(classNameByVariant)),
+  variant: PropTypes.oneOf(Object.keys(CLASS_NAME_BY_VARIANT)),
   className: PropTypes.string,
 };
 

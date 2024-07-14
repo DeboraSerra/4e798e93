@@ -2,12 +2,12 @@ import { createContext, useEffect, useMemo, useState } from "react";
 import { api } from "./api";
 import { archiveCalls, getCalls, retrieveCalls } from "./calls";
 
-export const activeType = {
+export const ACTIVE_TYPE = {
   all: 0,
   archive: 1,
 };
 
-export const modal = {
+export const MODAL = {
   none: 0,
   archive: 1,
   retrieve: 2,
@@ -16,22 +16,31 @@ export const modal = {
   archiveOne: 5,
 };
 
-export const context = createContext({});
+const DEFAULT_STATE = {
+  calls: [],
+  phone: "",
+  call: {},
+  moreInfo: "",
+  active: ACTIVE_TYPE.all,
+  showModal: MODAL.none,
+  isLoading: true,
+};
+
+export const context = createContext({
+  ...DEFAULT_STATE,
+  handleArchiveCalls: () => {},
+  handleArchiveOneCall: () => {},
+  handleOnCall: () => {},
+  handleRetrieveCalls: () => {},
+  setState: ({}) => {},
+});
 
 const Provider = ({ children }) => {
-  const [state, setState] = useState({
-    calls: [],
-    phone: "",
-    call: {},
-    moreInfo: "",
-    active: activeType.all,
-    showModal: modal.none,
-    isLoading: true,
-  });
-  const { active, calls, moreInfo, phone} = state
+  const [state, setState] = useState(DEFAULT_STATE);
+  const { active, calls, moreInfo, phone } = state;
 
   useEffect(() => {
-    getCalls(active === activeType.all ? false : true).then((result) =>
+    getCalls(active === ACTIVE_TYPE.all ? false : true).then((result) =>
       setState((prev) => ({ ...prev, calls: result, isLoading: false }))
     );
   }, [active]);
@@ -46,46 +55,46 @@ const Provider = ({ children }) => {
   }, [moreInfo]);
 
   const handleArchiveCalls = async () => {
-    setState(prev => ({...prev, isLoading: true}))
+    setState((prev) => ({ ...prev, isLoading: true }));
     const newCalls = await archiveCalls(calls);
     setState((prev) => ({
       ...prev,
       calls: newCalls,
-      active: activeType.all,
-      showModal: modal.none,
+      active: ACTIVE_TYPE.all,
+      showModal: MODAL.none,
       isLoading: false,
     }));
   };
 
   const handleArchiveOneCall = async () => {
-    setState(prev => ({...prev, isLoading: true}))
-    await api.archiveActivity(moreInfo, active === activeType.all);
+    setState((prev) => ({ ...prev, isLoading: true }));
+    await api.archiveActivity(moreInfo, active === ACTIVE_TYPE.all);
     const newCalls = await getCalls(false);
     setState((prev) => ({
       ...prev,
       calls: newCalls,
       moreInfo: "",
-      active: activeType.all,
-      showModal: modal.none,
-      isLoading: false
+      active: ACTIVE_TYPE.all,
+      showModal: MODAL.none,
+      isLoading: false,
     }));
   };
 
   const handleRetrieveCalls = async () => {
-    setState(prev => ({...prev, isLoading: true}))
+    setState((prev) => ({ ...prev, isLoading: true }));
     const newCalls = await retrieveCalls(calls);
     setState((prev) => ({
       ...prev,
       calls: newCalls,
-      active: activeType.all,
-      showModal: modal.none,
-      isLoading: false
+      active: ACTIVE_TYPE.all,
+      showModal: MODAL.none,
+      isLoading: false,
     }));
   };
 
   const handleOnCall = () => {
     if (!phone.trim()) return;
-    setState((prev) => ({ ...prev, phone: "", showModal: modal.callFail }));
+    setState((prev) => ({ ...prev, phone: "", showModal: MODAL.callFail }));
   };
 
   const value = useMemo(

@@ -1,7 +1,7 @@
 header {
   height: 60px;
   margin: 0 auto;
-  padding:  0 8px;
+  padding: 0 8px;
   text-align: center;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -34,7 +34,7 @@ header nav ul {
   cursor: pointer;
 }
 
-.header__link.active{
+.header__link.active {
   font-size: 18px;
   font-weight: 600;
   color: #141414;
